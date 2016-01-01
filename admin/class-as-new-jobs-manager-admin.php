@@ -128,7 +128,7 @@ class AS_New_Jobs_Manager_Admin {
 
         $textdomain = strtolower($cpt_name);
         $cap_type = 'post';
-        $single = ucfirst(strtolower($cpt_name));
+        $taxonomy = ucfirst(strtolower($cpt_name));
 
             $opts['can_export'] = TRUE;
             $opts['capability_type'] = $cap_type;
@@ -153,28 +153,28 @@ class AS_New_Jobs_Manager_Admin {
 
             $opts['capabilities']['delete_others_posts'] = "delete_others_{$cap_type}s";
 
-            $opts['labels']['add_new'] = __( "Add New {$single}", $textdomain );
-            $opts['labels']['add_new_item'] = __( "Add New {$single}", $textdomain );
+            $opts['labels']['add_new'] = __( "Add New {$taxonomy}", $textdomain );
+            $opts['labels']['add_new_item'] = __( "Add New {$taxonomy}", $textdomain );
             $opts['labels']['all_items'] = __( $plural, $textdomain );
-            $opts['labels']['edit_item'] = __( "Edit {$single}" , $textdomain);
+            $opts['labels']['edit_item'] = __( "Edit {$taxonomy}" , $textdomain);
             $opts['labels']['menu_name'] = __( $plural, $textdomain );
             $opts['labels']['name'] = __( $plural, $textdomain );
-            $opts['labels']['name_admin_bar'] = __( $single, $textdomain );
-            $opts['labels']['new_item'] = __( "New {$single}", $textdomain );
+            $opts['labels']['name_admin_bar'] = __( $taxonomy, $textdomain );
+            $opts['labels']['new_item'] = __( "New {$taxonomy}", $textdomain );
             $opts['labels']['not_found'] = __( "No {$plural} Found", $textdomain );
             $opts['labels']['not_found_in_trash'] = __( "No {$plural} Found in Trash", $textdomain );
             $opts['labels']['parent_item_colon'] = __( "Parent {$plural} :", $textdomain );
             $opts['labels']['search_items'] = __( "Search {$plural}", $textdomain );
-            $opts['labels']['singular_name'] = __( $single, $textdomain );
-            $opts['labels']['view_item'] = __( "View {$single}", $textdomain );
+            $opts['labels']['singular_name'] = __( $taxonomy, $textdomain );
+            $opts['labels']['view_item'] = __( "View {$taxonomy}", $textdomain );
 
             $opts['rewrite']['ep_mask'] = EP_PERMALINK;
             $opts['rewrite']['feeds'] = FALSE;
             $opts['rewrite']['pages'] = TRUE;
-            $opts['rewrite']['slug'] = __( strtolower( $single ), $textdomain );
+            $opts['rewrite']['slug'] = __( strtolower( $taxonomy ), $textdomain );
             $opts['rewrite']['with_front'] = FALSE;
 
-        register_post_type( $single, $opts );
+        register_post_type( $taxonomy, $opts );
     }
 
     /**
@@ -189,24 +189,25 @@ class AS_New_Jobs_Manager_Admin {
          */
 
         $post_type = 'as-job';
-        $all_taxonomy = array('department');
+        // $all_taxonomies = array('department');
+        $all_taxonomies = array('jobpost category', 'jobpost job type', 'jobpost location', 'jobpost qualification', 'jobpost experience', 'jobpost ctc');
 
-        foreach ($all_taxonomy as $single) {
+        foreach ($all_taxonomies as $taxonomy) {
 
-            $single = ucwords(strtolower(preg_replace('/\s+/', ' ', $single) ));
+            $taxonomy = ucwords(strtolower(preg_replace('/\s+/', ' ', $taxonomy) ));
 
-            $last_character = substr($single, -1);
+            $last_character = substr($taxonomy, -1);
 
                 if ($last_character === 'y') {
-                    $plural = substr_replace($single, 'ies', -1);
+                    $plural = substr_replace($taxonomy, 'ies', -1);
                 }
                 else {
-                    $plural = $single.'s'; // add 's' to convert singular name to plural
+                    $plural = $taxonomy.'s'; // add 's' to convert singular name to plural
                 }
 
             // add a 'post_type' as prefix followed by a '_'
-            // $tax_slug = $post_type.'_'.strtolower(str_replace(' ', '_', $single));
-            $tax_slug = strtolower(str_replace(' ', '_', $single));
+            // $tax_slug = $post_type.'_'.strtolower(str_replace(' ', '_', $taxonomy));
+            $tax_slug = strtolower(str_replace(' ', '_', $taxonomy));
 
             $opts['hierarchical'] = TRUE;
             //$opts['meta_box_cb'] = '';
@@ -224,23 +225,23 @@ class AS_New_Jobs_Manager_Admin {
             $opts['capabilities']['edit_terms'] = 'manage_categories';
             $opts['capabilities']['manage_terms'] = 'manage_categories';
 
-            $opts['labels']['add_new_item'] = __( "Add New $single", 'plugin-name' );
+            $opts['labels']['add_new_item'] = __( "Add New $taxonomy", 'plugin-name' );
             $opts['labels']['add_or_remove_items'] = __( "Add or remove {$plural}", 'plugin-name' );
             $opts['labels']['all_items'] = __( $plural, 'plugin-name' );
             $opts['labels']['choose_from_most_used'] = __( "Choose from most used {$plural}", 'plugin-name' );
-            $opts['labels']['edit_item'] = __( "Edit {$single}" , 'plugin-name');
+            $opts['labels']['edit_item'] = __( "Edit {$taxonomy}" , 'plugin-name');
             $opts['labels']['menu_name'] = __( $plural, 'plugin-name' );
             $opts['labels']['name'] = __( $plural, 'plugin-name' );
-            $opts['labels']['new_item_name'] = __( "New {$single} Name", 'plugin-name' );
+            $opts['labels']['new_item_name'] = __( "New {$taxonomy} Name", 'plugin-name' );
             $opts['labels']['not_found'] = __( "No {$plural} Found", 'plugin-name' );
-            $opts['labels']['parent_item'] = __( "Parent {$single}", 'plugin-name' );
-            $opts['labels']['parent_item_colon'] = __( "Parent {$single}:", 'plugin-name' );
+            $opts['labels']['parent_item'] = __( "Parent {$taxonomy}", 'plugin-name' );
+            $opts['labels']['parent_item_colon'] = __( "Parent {$taxonomy}:", 'plugin-name' );
             $opts['labels']['popular_items'] = __( "Popular {$plural}", 'plugin-name' );
             $opts['labels']['search_items'] = __( "Search {$plural}", 'plugin-name' );
             $opts['labels']['separate_items_with_commas'] = __( "Separate {$plural} with commas", 'plugin-name' );
-            $opts['labels']['singular_name'] = __( $single, 'plugin-name' );
-            $opts['labels']['update_item'] = __( "Update {$single}", 'plugin-name' );
-            $opts['labels']['view_item'] = __( "View {$single}", 'plugin-name' );
+            $opts['labels']['singular_name'] = __( $taxonomy, 'plugin-name' );
+            $opts['labels']['update_item'] = __( "Update {$taxonomy}", 'plugin-name' );
+            $opts['labels']['view_item'] = __( "View {$taxonomy}", 'plugin-name' );
 
             $opts['rewrite']['ep_mask'] = EP_NONE;
             $opts['rewrite']['hierarchical'] = FALSE;
@@ -280,7 +281,7 @@ class AS_New_Jobs_Manager_Admin {
 
         $textdomain = strtolower($cpt_name);
         $cap_type = 'post';
-        $single = ucfirst(strtolower($cpt_name));
+        $taxonomy = ucfirst(strtolower($cpt_name));
 
             $opts['can_export'] = TRUE;
             $opts['capability_type'] = $cap_type;
@@ -305,28 +306,28 @@ class AS_New_Jobs_Manager_Admin {
 
             $opts['capabilities']['delete_others_posts'] = "delete_others_{$cap_type}s";
 
-            $opts['labels']['add_new'] = __( "Add New {$single}", $textdomain );
-            $opts['labels']['add_new_item'] = __( "Add New {$single}", $textdomain );
+            $opts['labels']['add_new'] = __( "Add New {$taxonomy}", $textdomain );
+            $opts['labels']['add_new_item'] = __( "Add New {$taxonomy}", $textdomain );
             $opts['labels']['all_items'] = __( $plural, $textdomain );
-            $opts['labels']['edit_item'] = __( "Edit {$single}" , $textdomain);
+            $opts['labels']['edit_item'] = __( "Edit {$taxonomy}" , $textdomain);
             $opts['labels']['menu_name'] = __( $plural, $textdomain );
             $opts['labels']['name'] = __( $plural, $textdomain );
-            $opts['labels']['name_admin_bar'] = __( $single, $textdomain );
-            $opts['labels']['new_item'] = __( "New {$single}", $textdomain );
+            $opts['labels']['name_admin_bar'] = __( $taxonomy, $textdomain );
+            $opts['labels']['new_item'] = __( "New {$taxonomy}", $textdomain );
             $opts['labels']['not_found'] = __( "No {$plural} Found", $textdomain );
             $opts['labels']['not_found_in_trash'] = __( "No {$plural} Found in Trash", $textdomain );
             $opts['labels']['parent_item_colon'] = __( "Parent {$plural} :", $textdomain );
             $opts['labels']['search_items'] = __( "Search {$plural}", $textdomain );
-            $opts['labels']['singular_name'] = __( $single, $textdomain );
-            $opts['labels']['view_item'] = __( "View {$single}", $textdomain );
+            $opts['labels']['singular_name'] = __( $taxonomy, $textdomain );
+            $opts['labels']['view_item'] = __( "View {$taxonomy}", $textdomain );
 
             $opts['rewrite']['ep_mask'] = EP_PERMALINK;
             $opts['rewrite']['feeds'] = FALSE;
             $opts['rewrite']['pages'] = TRUE;
-            $opts['rewrite']['slug'] = __( strtolower( $single ), $textdomain );
+            $opts['rewrite']['slug'] = __( strtolower( $taxonomy ), $textdomain );
             $opts['rewrite']['with_front'] = FALSE;
 
-        register_post_type( $single, $opts );
+        register_post_type( $taxonomy, $opts );
     }
 
 

@@ -44,9 +44,9 @@ class AS_New_Jobs_Manager {
      *
      * @since    1.0.0
      * @access   protected
-     * @var      string    $plugin_name    The string used to uniquely identify this plugin.
+     * @var      string    $as_new_jobs_manager    The string used to uniquely identify this plugin.
      */
-    protected $plugin_name;
+    protected $as_new_jobs_manager;
 
     /**
      * The current version of the plugin.
@@ -68,7 +68,7 @@ class AS_New_Jobs_Manager {
      */
     public function __construct() {
 
-        $this->plugin_name = 'as-new-jobs-manager';
+        $this->as_new_jobs_manager = 'as-new-jobs-manager';
         $this->version = '1.0.0';
 
         $this->load_dependencies();
@@ -149,7 +149,7 @@ class AS_New_Jobs_Manager {
      */
     private function define_admin_hooks() {
 
-        $plugin_admin = new AS_New_Jobs_Manager_Admin( $this->get_plugin_name(), $this->get_version() );
+        $plugin_admin = new AS_New_Jobs_Manager_Admin( $this->get_as_new_jobs_manager(), $this->get_version() );
 
 //        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 //        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -167,7 +167,7 @@ class AS_New_Jobs_Manager {
      */
     private function define_public_hooks() {
 
-        $plugin_public = new AS_New_Jobs_Manager_Public( $this->get_plugin_name(), $this->get_version() );
+        $plugin_public = new AS_New_Jobs_Manager_Public( $this->get_as_new_jobs_manager(), $this->get_version() );
 
 //        $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 //        $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
@@ -191,8 +191,8 @@ class AS_New_Jobs_Manager {
      * @since     1.0.0
      * @return    string    The name of the plugin.
      */
-    public function get_plugin_name() {
-        return $this->plugin_name;
+    public function get_as_new_jobs_manager() {
+        return $this->as_new_jobs_manager;
     }
 
     /**

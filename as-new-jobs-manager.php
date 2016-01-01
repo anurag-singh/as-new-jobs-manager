@@ -16,6 +16,7 @@
  * Plugin Name:       AS New Jobs Manager
  * Plugin URI:        http://example.com/as-new-jobs-manager/
  * Description:       Add a new job opening management system
+ * Plugin Type:       Piklist
  * Version:           1.0.0
  * Author:            Anurag Singh
  * Author URI:        http://example.com/
