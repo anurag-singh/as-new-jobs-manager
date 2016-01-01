@@ -156,7 +156,7 @@ piklist('field', array(
 piklist('field', array(
     'type' => 'editor'
     ,'scope' => 'post'
-    ,'field' => 'field_name'
+    ,'field' => 'job_description'
     ,'label' => __('Job Description')
     ,'options' => array (
       'wpautop' => true
