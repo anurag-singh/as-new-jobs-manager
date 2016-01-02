@@ -7,11 +7,11 @@ Priority: default
 */
 ?>
 
-<!--
+    <!--
 'jobpost category', 'jobpost job type', 'jobpost location', 'jobpost qualification', 'jobpost experience', 'jobpost ctc'
 -->
 
-<?php
+    <?php
 
 piklist('field', array(
     'type' => 'group'
@@ -19,14 +19,22 @@ piklist('field', array(
     ,'label' => 'Job Details'
     ,'fields' => array(
                       array(
-                        'type' => 'text'
-                        ,'field' => 'postal_code'
-                        ,'label' => 'Job Code'
-                        ,'columns' => 6
+                            'scope' => 'post'
+                            ,'type' => 'text'
+                            ,'field' => 'post_title'
+                            ,'label' => 'Job Name'
+                            ,'columns' => 12
                       )
+                        
+                        ,array(
+                            'type' => 'text'
+                            ,'field' => 'postal_code'
+                            ,'label' => 'Job Code'
+                            ,'columns' => 6
+                        )
                       ,array(
                         'type' => 'text'
-                        ,'field' => 'phone'
+                        ,'field' => 'no_of_opening'
                         ,'label' => 'No. of Openings'
                         ,'columns' => 6
                       )
@@ -156,7 +164,7 @@ piklist('field', array(
 piklist('field', array(
     'type' => 'editor'
     ,'scope' => 'post'
-    ,'field' => 'job_description'
+    ,'field' => 'post_content'
     ,'label' => __('Job Description')
     ,'options' => array (
       'wpautop' => true

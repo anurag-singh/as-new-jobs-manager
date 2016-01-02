@@ -148,7 +148,7 @@ class AS_New_Jobs_Manager_Admin {
             $opts['show_in_menu'] = TRUE;
             $opts['show_in_nav_menu'] = TRUE;
             $opts['show_ui'] = TRUE;
-            $opts['supports'] = array( 'title');
+            $opts['supports'] = FALSE;
             $opts['taxonomies'] = array('department');
 
             $opts['capabilities']['delete_others_posts'] = "delete_others_{$cap_type}s";
